@@ -13,7 +13,7 @@ there are 2 scenes :
   docker run -it --privileged -p 5050:5050 autowx2:latest      
   
 2, run as your config and keep all received image\record:   
-  docker run -it --privileged -p 5050:5050 -v /volume1/homes/docker/autowx2/config:/config -v /volume1/homes/docker/autowx2/recordings:/autowx2/var/www/recordings autowx2:latest    
+  docker run -it --privileged -p 5050:5050 -v /your_local_path/config:/config -v /your_local_path/recordings:/autowx2/var/www/recordings autowx2:latest    
   
 after the docker image running, you can browse the result and log:    
    http://xx.xx.xx.xx:5050    
