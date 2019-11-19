@@ -4,10 +4,10 @@ a docker file to build a autowx2 system
 autowx2 is a collected program for receive NOAA,ISS,METEOR-M2,APRS infomation , it running by the time table to automate receive.   
 autowx2 source code: https://github.com/filipsPL/autowx2   
 
-build command:
+build command:    
   docker build -t autowx2 -f ./dockerfile .  
 
-suggest run docker command:   
+suggest run docker command:     
 there are 2 scenes :   
 1, simple run for a look or test:   
   docker run -it --privileged -p 5050:5050 autowx2:latest      
