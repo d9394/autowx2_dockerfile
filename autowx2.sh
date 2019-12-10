@@ -23,7 +23,7 @@ ln -s /config/noaa.conf /autowx2/modules/noaa/noaa.conf
 if [[ ! -f /config/meteor.conf ]] ; then
   cp -f /autowx2/modules/meteor-m2/meteor.conf.example /config/meteor.conf
 fi
-rm -f /autowx2/modules/meteor-m2/metero.conf
+rm -f /autowx2/modules/meteor-m2/meteor.conf
 ln -s /config/meteor.conf /autowx2/modules/meteor-m2/meteor.conf
 
 aaa=$(cat /autowx2/autowx2_conf.py | grep "aprs_freq" | grep -Eo '[0-9]{9}')
@@ -56,8 +56,10 @@ mkdir -p /autowx2/var/www/recordings/dump1090
 chmod 755 -R /autowx2/var/www/recordings/iss/rec
 
 #. /autowx2/bin/update-keps.sh
-/etc/init.d/nginx restart
-/etc/init.d/cron restart
+/etc/init.d/nginx stop
+/etc/init.d/nginx start
+/etc/init.d/cron stop
+/etc/init.d/cron start
 cd /autowx2/bin
 ./gen-static-page.sh
 
