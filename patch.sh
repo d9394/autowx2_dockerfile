@@ -25,9 +25,10 @@ echo '$baseDir/bin/gen-static-page.sh' >> /autowx2/modules/iss/iss_voice_mp3.sh
 
 #sed -i 's/heatmap-osm2.jpg/heatmap-osm2.png/g' /autowx2/bin/gen-static-page.sh
 
-echo "ls -1 \$ourdir/*.png | xargs -n 1 bash -c 'convert \"$0\" \"${0%.png}.jpg\"'" >> /autowx2/bin/dump1090-draw_heatmap.sh
+echo ' ' >> /autowx2/bin/dump1090-draw_heatmap.sh
+echo 'ls -1 $ourdir/*.png | xargs -n 1 bash -c "convert $0 ${0%.png}.jpg"' >> /autowx2/bin/dump1090-draw_heatmap.sh
 
-echo "rm $outdir/*.png" >> /autowx2/bin/dump1090-draw_heatmap.sh
+echo 'rm $outdir/*.png' >> /autowx2/bin/dump1090-draw_heatmap.sh
 
 sed -i 's/database="\$baseDir\/recordings\/dump1090\/adsb_messages\.db"/database="\$baseDir\/var\/www\/recordings\/dump1090\/adsb_messages\.db"/g' /autowx2/bin/dump1090.sh
 
