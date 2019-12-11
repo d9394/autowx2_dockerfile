@@ -30,7 +30,7 @@ sed -i 's/$baseDir\/bin\/heatmap.py -b/#$baseDir\/bin\/heatmap.py -b/g' /autowx2
 sed -i 's/$baseDir\/bin\/heatmap.py -r/#$baseDir\/bin\/heatmap.py -r/g' /autowx2/bin/dump1090-draw_heatmap.sh
 sed -i 's/rm $tempdir\/h1\.png/#rm $tempdir\/h1\.png/g' /autowx2/bin/dump1090-draw_heatmap.sh
 echo ' ' >> /autowx2/bin/dump1090-draw_heatmap.sh
-echo 'ls -1 $outdir/*.png | xargs -n 1 bash -c '"'"'convert "$0" "${0%.png}.jpg"'"'" >> dump1090-draw_heatmap.sh
+echo 'ls -1 $outdir/*.png | xargs -n 1 bash -c '"'"'convert "$0" "${0%.png}.jpg"'"'" >> /autowx2/bin/dump1090-draw_heatmap.sh
 echo 'rm $outdir/*.png' >> /autowx2/bin/dump1090-draw_heatmap.sh
 echo 'python $baseDir/bin/Picadddatetime.py $outdir/heatmap-osm.jpg' >> /autowx2/bin/dump1090-draw_heatmap.sh
 echo 'python $baseDir/bin/Picadddatetime.py $outdir/heatmap-osm2.jpg' >> /autowx2/bin/dump1090-draw_heatmap.sh
