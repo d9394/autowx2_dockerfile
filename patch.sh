@@ -22,29 +22,24 @@ sed -i 's/tempdir="\/tmp"/tempdir="\/dev\/shm"/g' /autowx2/bin/dump1090-draw_hea
 echo '$baseDir/bin/gen-static-page.sh' >> /autowx2/modules/iss/iss_voice_mp3.sh
 
 #sed -i 's/heatmap-osm.jpg/heatmap-osm.png/g' /autowx2/bin/gen-static-page.sh
-
 #sed -i 's/heatmap-osm2.jpg/heatmap-osm2.png/g' /autowx2/bin/gen-static-page.sh
 
+sed -i 's/database="\$baseDir\/recordings\/dump1090\/adsb_messages\.db"/database="\$baseDir\/var\/www\/recordings\/dump1090\/adsb_messages\.db"/g' /autowx2/bin/dump1090-draw_heatmap.sh
+sed -i 's/outdir="\$baseDir\/recordings\/dump1090\/"/outdir="\$baseDir\/var\/www\/recordings\/dump1090\/"/g' /autowx2/bin/dump1090-draw_heatmap.sh
+sed -i 's/$baseDir\/bin\/heatmap.py -b/#$baseDir\/bin\/heatmap.py -b/g' /autowx2/bin/dump1090-draw_heatmap.sh
+sed -i 's/$baseDir\/bin\/heatmap.py -r/#$baseDir\/bin\/heatmap.py -r/g' /autowx2/bin/dump1090-draw_heatmap.sh
+sed -i 's/rm $tempdir\/h1\.png/#rm $tempdir\/h1\.png/g' /autowx2/bin/dump1090-draw_heatmap.sh
 echo ' ' >> /autowx2/bin/dump1090-draw_heatmap.sh
-echo 'ls -1 $ourdir/*.png | xargs -n 1 bash -c "convert $0 ${0%.png}.jpg"' >> /autowx2/bin/dump1090-draw_heatmap.sh
-
+echo 'ls -1 $outdir/*.png | xargs -n 1 bash -c '"'"'convert "$0" "${0%.png}.jpg"'"'" >> dump1090-draw_heatmap.sh
 echo 'rm $outdir/*.png' >> /autowx2/bin/dump1090-draw_heatmap.sh
+echo 'python $baseDir/bin/Picadddatetime.py $outdir/heatmap-osm.jpg' >> /autowx2/bin/dump1090-draw_heatmap.sh
+echo 'python $baseDir/bin/Picadddatetime.py $outdir/heatmap-osm2.jpg' >> /autowx2/bin/dump1090-draw_heatmap.sh
 
 sed -i 's/database="\$baseDir\/recordings\/dump1090\/adsb_messages\.db"/database="\$baseDir\/var\/www\/recordings\/dump1090\/adsb_messages\.db"/g' /autowx2/bin/dump1090.sh
-
-sed -i 's/database="\$baseDir\/recordings\/dump1090\/adsb_messages\.db"/database="\$baseDir\/var\/www\/recordings\/dump1090\/adsb_messages\.db"/g' /autowx2/bin/dump1090-draw_heatmap.sh
-
-sed -i 's/outdir="\$baseDir\/recordings\/dump1090\/"/outdir="\$baseDir\/var\/www\/recordings\/dump1090\/"/g' /autowx2/bin/dump1090-draw_heatmap.sh
 
 sed -i 's/^rm $recdir\/$fileNameCore\.wav/#rm $recdir\/$fileNameCore\.wav/g' /autowx2/modules/noaa/noaa_process.sh
 
 sed '38 ipython /autowx2/bin/Picadddatetime.py $obrazek' -i /autowx2/modules/noaa/noaa_gallery.sh
-
-echo 'python /autowx2/bin/Picadddatetime.py /autowx2/vaw/www/recordings/dump1090/heatm
-ap-osm.jpg' >> /autowx2/bin/dump1090-draw_heatmap.sh
-
-echo 'python /autowx2/bin/Picadddatetime.py /autowx2/vaw/www/recordings/dump1090/heatm
-ap-osm2.jpg' >> /autowx2/bin/dump1090-draw_heatmap.sh
 
 find /root/mlrpt -name "*.cfg" | xargs sed -i "s/Default (\/home\/<user>\/mlrpt\/images\/)/Default (\/autowx2\/var\/www\/recordings\/meteor\/raw\/)/g"
 find /root/mlrpt -name "*.cfg" | xargs sed -i "s/^#RTL-SDR/RTL-SDR/g" 
