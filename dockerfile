@@ -51,6 +51,8 @@ ADD ./patch.sh /
 RUN /patch.sh
 #RUN rm -f /patch.sh
 
+ADD ./Picadddatetime.py /autowx2/bin/
+
 VOLUME [ "/config" ]
 ADD ./autowx2.sh /
 CMD [ "/autowx2.sh","run" ]
