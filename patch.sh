@@ -7,6 +7,8 @@
 
 sed -i 's/#gzip on/gzip on/g' /etc/nginx/nginx.conf
 
+sed -i 's/sessions\s*required\s*pam_loginuid\.so/#session required pam_loginuid\.so/g' /etc/pam.d/cron
+
 echo 'find $wwwDir/ -name "*.html" | xargs sed -i "s/\"\/\//\"\/lastlog\//g"' >> /autowx2/bin/gen-static-page.sh
 
 sed -i '46 i<li class="nav-item"><a class="nav-link" href="/">Run Log</a></li>'  /autowx2/var/www/index.tpl 
@@ -34,6 +36,14 @@ sed -i 's/database="\$baseDir\/recordings\/dump1090\/adsb_messages\.db"/database
 sed -i 's/outdir="\$baseDir\/recordings\/dump1090\/"/outdir="\$baseDir\/var\/www\/recordings\/dump1090\/"/g' /autowx2/bin/dump1090-draw_heatmap.sh
 
 sed -i 's/^rm $recdir\/$fileNameCore\.wav/#rm $recdir\/$fileNameCore\.wav/g' /autowx2/modules/noaa/noaa_process.sh
+
+sed '38 ipython /autowx2/bin/Picadddatetime.py $obrazek' -i /autowx2/modules/noaa/noaa_gallery.sh
+
+echo 'python /autowx2/bin/Picadddatetime.py /autowx2/vaw/www/recordings/dump1090/heatm
+ap-osm.jpg' >> /autowx2/bin/dump1090-draw_heatmap.sh
+
+echo 'python /autowx2/bin/Picadddatetime.py /autowx2/vaw/www/recordings/dump1090/heatm
+ap-osm2.jpg' >> /autowx2/bin/dump1090-draw_heatmap.sh
 
 find /root/mlrpt -name "*.cfg" | xargs sed -i "s/Default (\/home\/<user>\/mlrpt\/images\/)/Default (\/autowx2\/var\/www\/recordings\/meteor\/raw\/)/g"
 find /root/mlrpt -name "*.cfg" | xargs sed -i "s/^#RTL-SDR/RTL-SDR/g" 
